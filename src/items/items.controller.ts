@@ -1,12 +1,15 @@
-import { Controller, Get, Param, Post, Body, Query, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Query, Delete, UsePipes, ValidationPipe, UseGuards, SetMetadata } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDTO } from './dto/create-item.dto';
+import { RolesGuard } from '../common/role.guard';
 
 @Controller('items')
+@UseGuards(RolesGuard)
 export class ItemsController {
     constructor(private itemsService: ItemsService) { }
 
     @Get()
+    @SetMetadata('roles', ['admin', 'superadmin'])
     async getItems() {
         const items = await this.itemsService.getItems();
         return items;
