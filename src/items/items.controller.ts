@@ -22,6 +22,7 @@ export class ItemsController {
     }
 
     @Post()
+    @UsePipes(new ValidationPipe(({whitelist: true, forbidNonWhitelisted: true})))
     async addItem(@Body() createItemDTO: CreateItemDTO) {
         const item = await this.itemsService.addItem(createItemDTO);
         return item;
