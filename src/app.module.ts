@@ -2,8 +2,9 @@ import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ItemsModule } from './items/items.module';
-import { authenticathor } from './auth.middleware';
+
 import { ItemsController } from './items/items.controller';
+import { authenticathor } from './common/auth.middleware';
 
 @Module({
   imports: [ItemsModule],
